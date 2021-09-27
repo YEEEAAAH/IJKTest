@@ -57,7 +57,7 @@ public class MediaPlayerActivity extends AppCompatActivity implements VideoListe
     private TextView tvTotalTime;
     private ImageButton tvScale;
     private RelativeLayout rlPlayer;
-    private TextView tvPlayStatus;
+    private ImageButton tvPlayStatus;
     private TextView tvPreTime;
     private ProgressBar progressVolume;
     private ProgressBar progressLight;
@@ -177,12 +177,9 @@ public class MediaPlayerActivity extends AppCompatActivity implements VideoListe
             @Override
             public void onClick(View v) {
                 if (player != null) {
-                    if (player.isPlaying()) {
-                        player.pause();
-                        tvPlayStatus.setText("播放");
-                    } else {
+                    if (!player.isPlaying()) {
                         player.resume();
-                        tvPlayStatus.setText("暂停");
+                        tvPlayStatus.setVisibility(View.INVISIBLE);
                     }
                 }
             }
@@ -207,10 +204,10 @@ public class MediaPlayerActivity extends AppCompatActivity implements VideoListe
                             if (player != null) {
                                 if (player.isPlaying()) {
                                     player.pause();
-                                    tvPlayStatus.setText("播放");
+                                    tvPlayStatus.setVisibility(View.VISIBLE);
                                 } else {
                                     player.resume();
-                                    tvPlayStatus.setText("暂停");
+                                    tvPlayStatus.setVisibility(View.INVISIBLE);
                                 }
                             }
                             clickCount = 0;

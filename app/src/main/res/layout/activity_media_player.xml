@@ -56,16 +56,15 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
-    <TextView
+    <ImageButton
         android:id="@+id/tv_play_status"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
+        android:layout_width="54dp"
+        android:layout_height="54dp"
         android:layout_margin="10dp"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:text="暂停" />
+        android:background="@drawable/ic_resume"
+        android:visibility="invisible"
+        />
 
     <RelativeLayout
         android:id="@+id/rl_bottom"
