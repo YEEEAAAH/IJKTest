@@ -100,8 +100,8 @@ public class MediaPlayerActivity extends AppCompatActivity implements VideoListe
         setContentView(R.layout.activity_media_player);
 
         Intent intent = getIntent();
-        path = Uri.parse(intent.getStringExtra(OpenFileActivity.VIDEO_URI));
-        videoName = intent.getStringExtra(OpenFileActivity.VIDEO_NAME);
+        path = Uri.parse(intent.getStringExtra(MainActivity.VIDEO_URI));
+        videoName = intent.getStringExtra(MainActivity.VIDEO_NAME);
 
         findViewById();
 

@@ -10,8 +10,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_player_video"
-        android:text="选择文件"
+        android:id="@+id/check_file"
+        android:text="查看文件"
         />
 
 
