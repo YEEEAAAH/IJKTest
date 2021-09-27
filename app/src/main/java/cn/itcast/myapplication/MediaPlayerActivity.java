@@ -10,8 +10,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -20,7 +18,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
@@ -43,7 +40,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 
-public class MediaPlayerActivity extends AppCompatActivity implements VideoListener {
+public class MediaPlayerActivity extends AppCompatActivity implements VideoListener{
 
     private static final String TAG = "MediaPlayerActivity";
     //屏幕比例
@@ -51,6 +48,8 @@ public class MediaPlayerActivity extends AppCompatActivity implements VideoListe
     private static final int SIZE_4_3 = 1;
     private static final int SIZE_16_9 = 2;
     private int currentSize = SIZE_16_9;
+
+
 
     private MyPlayer player;
     private SeekBar seekBar;
@@ -82,6 +81,10 @@ public class MediaPlayerActivity extends AppCompatActivity implements VideoListe
     private Sensor sensor1;
     private WeakHandler handler = new WeakHandler(this);
     private Uri path;
+
+
+
+
     /**
      * 播放比例
      */
@@ -186,10 +189,38 @@ public class MediaPlayerActivity extends AppCompatActivity implements VideoListe
         });
 
         player.setOnTouchListener(new View.OnTouchListener() {
+            private int clickCount = 0;
+            private long firstClick = 0;
+            private long secondClick = 0;
+            private final int interval = 400;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
                 if (MotionEvent.ACTION_DOWN == event.getAction()) {
+                    clickCount++;
+                    if(1==clickCount){
+                        firstClick = System.currentTimeMillis();
+                    }
+                    else if(2==clickCount){
+                        secondClick = System.currentTimeMillis();
+                        if(secondClick-firstClick<interval){
+                            if (player != null) {
+                                if (player.isPlaying()) {
+                                    player.pause();
+                                    tvPlayStatus.setText("播放");
+                                } else {
+                                    player.resume();
+                                    tvPlayStatus.setText("暂停");
+                                }
+                            }
+                            clickCount = 0;
+                            firstClick = 0;
+                        }else{
+                            firstClick = secondClick;
+                            clickCount = 1;
+                        }
+                        secondClick = 0;
+                    }
                     Log.d(TAG, "onTouch: "+"ACTION_DOWN");
                     startX = event.getX();
                     startY = event.getY();
