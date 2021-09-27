@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_open_file);
+        setContentView(R.layout.activity_main);
         //通过系统的文件浏览器选择一个文件
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         //筛选，只显示可以“打开”的结果，如文件(而不是联系人或时区列表)
@@ -80,23 +80,18 @@ public class MainActivity extends AppCompatActivity {
                 }
                 cursor.close();
             }
+            if(uri!=null){
+                Intent intent = new Intent(MainActivity.this,MediaPlayerActivity.class);
+
+                intent.putExtra(VIDEO_NAME,displayName);
+
+                intent.putExtra(VIDEO_URI,uri.toString());
+                startActivity(intent);
+                finish();
+            }
 
         }
 
-        findViewById(R.id.check_file).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(uri!=null){
-                    Intent intent = new Intent(MainActivity.this,MediaPlayerActivity.class);
-
-                    intent.putExtra(VIDEO_NAME,displayName);
-
-                    intent.putExtra(VIDEO_URI,uri.toString());
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
     }
 
 

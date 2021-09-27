@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OpenFileActivity"></activity>
         <activity
             android:name=".MediaPlayerActivity"
             android:configChanges="orientation|screenSize" />

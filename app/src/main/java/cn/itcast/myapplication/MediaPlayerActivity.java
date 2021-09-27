@@ -737,7 +737,7 @@ public class MediaPlayerActivity extends AppCompatActivity implements VideoListe
             float X = -values[_DATA_X];
             float Y = -values[_DATA_Y];
             float Z = -values[_DATA_Z];
-            //这一段据说是 android源码里面拿出来的计算 屏幕旋转的 不懂 先留着 万一以后懂了呢
+
             float magnitude = X * X + Y * Y;
             // Don't trust the angle if the magnitude is small compared to the y value
             if (magnitude * 4 >= Z * Z) {
